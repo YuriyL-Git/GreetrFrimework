@@ -1,6 +1,8 @@
-(function (global, $) {
+//semicolon at the beginning of a immediately invoked function is good tone
+// to avoid problems in case that was used several libraries
+;(function (global, $) {
 
-    //--------setting up local variables----------------------------
+    //-------- setting up local variables ----------------------------
 
     let supportedLang = ['en', 'es', 'ru']
 
@@ -36,6 +38,7 @@
         //better to reassign this to self and access properties through self
         //to avoid mistakes
         let self = this
+        //legacy default assignment only for demonstration
         self.firstName = firstName || ''
         self.lastName = lastName || ''
         self.language = language || 'en'

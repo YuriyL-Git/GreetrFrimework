@@ -1,2 +1,9 @@
 let john = G$('John', 'Doe', 'en')
-john.greet(true)
+$('#login').click(
+    function () {
+        let user = G$('John', 'Doe')
+
+        user.setLang($('#lang').val())
+            .HTMLGreeting('#greeting', true).log()
+    }
+)
