@@ -38,10 +38,10 @@
 
         greeting: function () {
             return greetings[this.language] + ' ' + this.firstName + '!'
-        }
+        },
         formalGreeetings: function () {
             return formalGreeetings[this.language] + ', ' + this.fullName()
-        }
+        },
 
         greet: function (formal) {
             let msg
@@ -55,6 +55,18 @@
             }
             //'this' refers to the calling object at execution time
             // makes the method chainable
+            return this
+        },
+
+        log: function () {
+            if (console) {
+                console.log(logMessages[this.language] + ', ' + this.fullName())
+            }
+            return this
+        },
+        setLang: function (lang) {
+            this.language = lang
+            this.validate()
             return this
         }
     }

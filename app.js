@@ -1,3 +1,5 @@
-let g = G$('John', 'Doe')
+let john = G$('John', 'Doe', 'ru')
 
-console.log(g)
+john.greet().greet(true).setLang('es').greet().setLang('en').greet()
+
+console.log(john)
