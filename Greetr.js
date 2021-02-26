@@ -3,30 +3,52 @@
 
 (function (global, $) {
 
-    let Greetr = function (firstName, lastName, language) {
-        return new Greetr.init(firstName, lastName, language)
-    }
+
+    //setting up local variables-----------------------------------
+
     let supportedLang = ['en', 'es', 'ru']
 
+    //informal greentings
     let greetings = {
         en: 'Hello',
         es: 'Hola',
         ru: 'Привет'
     }
 
+    //formal greetings
     let formalGreeetings = {
         en: 'Greetings',
         es: 'Saludos',
         ru: 'Здравствуйте'
     }
 
+    //logger messages
     let logMessages = {
         en: 'Logged in',
         es: 'Inicio sesion',
         ru: 'Залогинено'
     }
+    //-----------------------------------------------------------
 
+    //allows to create new object without calling 'new' keyword
+    let Greetr = function (firstName, lastName, language) {
+        return new Greetr.init(firstName, lastName, language)
+    }
 
+    //the actual object is created here
+    Greetr.init = function (firstName, lastName, language) {
+        let self = this
+        self.firstName = firstName || ''
+        self.lastName = lastName || ''
+        self.language = language || 'en'
+
+    }
+
+    //reassigning prototype to be able to access prototype properties of
+    //the function that really created object
+    Greetr.init.prototype = Greetr.prototype
+
+    //assigning functions to created object
     Greetr.prototype = {
         fullName: function () {
             return this.firstName + ' ' + this.lastName
@@ -64,25 +86,29 @@
             }
             return this
         },
+        //allows to change language of created object after creation
         setLang: function (lang) {
             this.language = lang
             this.validate()
             return this
+        },
+
+        //include support for jQuery
+        HTMLGreeting: function (selector, formal) {
+            if (!$) throw 'jQuery not loaded'
+            if (!selector) throw 'missing jQuery selector'
+
+            let msg
+            if (formal) msg = this.formalGreeetings()
+            if (!formal) msg = this.greeting()
+            $(selector).html(msg)
+            return this
         }
     }
 
-    Greetr.init = function (firstName, lastName, language) {
-        let self = this
-        self.firstName = firstName || ''
-        self.lastName = lastName || ''
-        self.language = language || 'en'
-
-    }
-    Greetr.init.prototype = Greetr.prototype
 
     //create aliases to Greetr in global object
     global.Greetr = global.G$ = Greetr
-
 
 }(window, $))
 
