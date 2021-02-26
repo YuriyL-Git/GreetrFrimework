@@ -1,10 +1,6 @@
-//const jQuery = require('./jquery-3.5.1');
-//import $ from './jquery-3.5.1'
-
 (function (global, $) {
 
-
-    //setting up local variables-----------------------------------
+    //--------setting up local variables----------------------------
 
     let supportedLang = ['en', 'es', 'ru']
 
@@ -37,18 +33,17 @@
 
     //the actual object is created here
     Greetr.init = function (firstName, lastName, language) {
+        //better to reassign this to self and access properties through self
+        //to avoid mistakes
         let self = this
         self.firstName = firstName || ''
         self.lastName = lastName || ''
         self.language = language || 'en'
-
+        self.validate()
     }
 
-    //reassigning prototype to be able to access prototype properties of
-    //the function that really created object
-    Greetr.init.prototype = Greetr.prototype
 
-    //assigning functions to created object
+    //assigning properties to the created object
     Greetr.prototype = {
         fullName: function () {
             return this.firstName + ' ' + this.lastName
@@ -106,10 +101,14 @@
         }
     }
 
+    //reassigning prototype reference to be able to access prototype properties of
+    //the function that really created the object
+    Greetr.init.prototype = Greetr.prototype
+
 
     //create aliases to Greetr in global object
     global.Greetr = global.G$ = Greetr
 
-}(window, $))
+}(window, jQuery))
 
 

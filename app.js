@@ -1,3 +1,2 @@
-let john = G$('John', 'Doe', 'ru')
-
-console.log(john)
+let john = G$('John', 'Doe', 'en')
+john.greet(true)
